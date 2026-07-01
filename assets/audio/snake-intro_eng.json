@@ -1,0 +1,377 @@
+{
+  "language_code": "eng",
+  "segments": [
+    {
+      "text": "Colonel, I'm in. It's quiet. Too quiet. What you're about to witness isn't real footage. It was generated frame by frame by AI, a tribute to a mission we never forgot. Kept you waiting, huh? Let's move.",
+      "start_time": 0.239,
+      "end_time": 15.699,
+      "words": [
+        {
+          "text": "Colonel,",
+          "start_time": 0.258,
+          "end_time": 0.538
+        },
+        {
+          "text": " ",
+          "start_time": 0.538,
+          "end_time": 1.0579999999999998
+        },
+        {
+          "text": "I'm",
+          "start_time": 1.0579999999999998,
+          "end_time": 1.158
+        },
+        {
+          "text": " ",
+          "start_time": 1.158,
+          "end_time": 1.218
+        },
+        {
+          "text": "in.",
+          "start_time": 1.218,
+          "end_time": 1.4180000000000001
+        },
+        {
+          "text": " ",
+          "start_time": 1.4180000000000001,
+          "end_time": 1.979
+        },
+        {
+          "text": "It's",
+          "start_time": 1.979,
+          "end_time": 2.158
+        },
+        {
+          "text": " ",
+          "start_time": 2.158,
+          "end_time": 2.258
+        },
+        {
+          "text": "quiet.",
+          "start_time": 2.258,
+          "end_time": 2.598
+        },
+        {
+          "text": " ",
+          "start_time": 2.598,
+          "end_time": 3.098
+        },
+        {
+          "text": "Too",
+          "start_time": 3.098,
+          "end_time": 3.239
+        },
+        {
+          "text": " ",
+          "start_time": 3.239,
+          "end_time": 3.318
+        },
+        {
+          "text": "quiet.",
+          "start_time": 3.318,
+          "end_time": 3.618
+        },
+        {
+          "text": " ",
+          "start_time": 3.618,
+          "end_time": 4.338
+        },
+        {
+          "text": "What",
+          "start_time": 4.338,
+          "end_time": 4.478
+        },
+        {
+          "text": " ",
+          "start_time": 4.478,
+          "end_time": 4.538
+        },
+        {
+          "text": "you're",
+          "start_time": 4.538,
+          "end_time": 4.639
+        },
+        {
+          "text": " ",
+          "start_time": 4.639,
+          "end_time": 4.719
+        },
+        {
+          "text": "about",
+          "start_time": 4.719,
+          "end_time": 4.938
+        },
+        {
+          "text": " ",
+          "start_time": 4.938,
+          "end_time": 4.958
+        },
+        {
+          "text": "to",
+          "start_time": 4.958,
+          "end_time": 5.058
+        },
+        {
+          "text": " ",
+          "start_time": 5.058,
+          "end_time": 5.117999999999999
+        },
+        {
+          "text": "witness",
+          "start_time": 5.119,
+          "end_time": 5.498
+        },
+        {
+          "text": " ",
+          "start_time": 5.498,
+          "end_time": 5.678
+        },
+        {
+          "text": "isn't",
+          "start_time": 5.679,
+          "end_time": 5.958
+        },
+        {
+          "text": " ",
+          "start_time": 5.958,
+          "end_time": 6.1579999999999995
+        },
+        {
+          "text": "real",
+          "start_time": 6.159,
+          "end_time": 6.438
+        },
+        {
+          "text": " ",
+          "start_time": 6.438,
+          "end_time": 6.638
+        },
+        {
+          "text": "footage.",
+          "start_time": 6.638,
+          "end_time": 7.038
+        },
+        {
+          "text": " ",
+          "start_time": 7.038,
+          "end_time": 7.438
+        },
+        {
+          "text": "It",
+          "start_time": 7.438,
+          "end_time": 7.518
+        },
+        {
+          "text": " ",
+          "start_time": 7.518,
+          "end_time": 7.558
+        },
+        {
+          "text": "was",
+          "start_time": 7.558,
+          "end_time": 7.758
+        },
+        {
+          "text": " ",
+          "start_time": 7.758,
+          "end_time": 7.818
+        },
+        {
+          "text": "generated",
+          "start_time": 7.818,
+          "end_time": 8.378
+        },
+        {
+          "text": " ",
+          "start_time": 8.378,
+          "end_time": 8.758000000000001
+        },
+        {
+          "text": "frame",
+          "start_time": 8.758000000000001,
+          "end_time": 9.138
+        },
+        {
+          "text": " ",
+          "start_time": 9.138,
+          "end_time": 9.178
+        },
+        {
+          "text": "by",
+          "start_time": 9.178,
+          "end_time": 9.298
+        },
+        {
+          "text": " ",
+          "start_time": 9.298,
+          "end_time": 9.458
+        },
+        {
+          "text": "frame",
+          "start_time": 9.459000000000001,
+          "end_time": 9.858
+        },
+        {
+          "text": " ",
+          "start_time": 9.858,
+          "end_time": 10.018
+        },
+        {
+          "text": "by",
+          "start_time": 10.018,
+          "end_time": 10.199000000000002
+        },
+        {
+          "text": " ",
+          "start_time": 10.199000000000002,
+          "end_time": 10.318000000000001
+        },
+        {
+          "text": "AI,",
+          "start_time": 10.318000000000001,
+          "end_time": 10.758000000000001
+        },
+        {
+          "text": " ",
+          "start_time": 10.758000000000001,
+          "end_time": 11.218
+        },
+        {
+          "text": "a",
+          "start_time": 11.218,
+          "end_time": 11.278
+        },
+        {
+          "text": " ",
+          "start_time": 11.278,
+          "end_time": 11.298
+        },
+        {
+          "text": "tribute",
+          "start_time": 11.298,
+          "end_time": 11.638
+        },
+        {
+          "text": " ",
+          "start_time": 11.638,
+          "end_time": 11.678
+        },
+        {
+          "text": "to",
+          "start_time": 11.678,
+          "end_time": 11.758000000000001
+        },
+        {
+          "text": " ",
+          "start_time": 11.758000000000001,
+          "end_time": 11.798
+        },
+        {
+          "text": "a",
+          "start_time": 11.798,
+          "end_time": 11.858
+        },
+        {
+          "text": " ",
+          "start_time": 11.858,
+          "end_time": 11.918000000000001
+        },
+        {
+          "text": "mission",
+          "start_time": 11.918000000000001,
+          "end_time": 12.178
+        },
+        {
+          "text": " ",
+          "start_time": 12.178,
+          "end_time": 12.239
+        },
+        {
+          "text": "we",
+          "start_time": 12.239,
+          "end_time": 12.358
+        },
+        {
+          "text": " ",
+          "start_time": 12.358,
+          "end_time": 12.418000000000001
+        },
+        {
+          "text": "never",
+          "start_time": 12.418000000000001,
+          "end_time": 12.619000000000002
+        },
+        {
+          "text": " ",
+          "start_time": 12.619000000000002,
+          "end_time": 12.659
+        },
+        {
+          "text": "forgot.",
+          "start_time": 12.659,
+          "end_time": 13.038
+        },
+        {
+          "text": " ",
+          "start_time": 13.038,
+          "end_time": 13.579
+        },
+        {
+          "text": "Kept",
+          "start_time": 13.579,
+          "end_time": 13.778
+        },
+        {
+          "text": " ",
+          "start_time": 13.778,
+          "end_time": 13.798
+        },
+        {
+          "text": "you",
+          "start_time": 13.798,
+          "end_time": 13.918000000000001
+        },
+        {
+          "text": " ",
+          "start_time": 13.918000000000001,
+          "end_time": 13.958
+        },
+        {
+          "text": "waiting,",
+          "start_time": 13.958,
+          "end_time": 14.298
+        },
+        {
+          "text": " ",
+          "start_time": 14.298,
+          "end_time": 14.398000000000001
+        },
+        {
+          "text": "huh?",
+          "start_time": 14.398000000000001,
+          "end_time": 14.578000000000001
+        },
+        {
+          "text": " ",
+          "start_time": 14.578000000000001,
+          "end_time": 15.118
+        },
+        {
+          "text": "Let's",
+          "start_time": 15.119000000000002,
+          "end_time": 15.338000000000001
+        },
+        {
+          "text": " ",
+          "start_time": 15.338000000000001,
+          "end_time": 15.378
+        },
+        {
+          "text": "move.",
+          "start_time": 15.378,
+          "end_time": 15.659
+        }
+      ]
+    }
+  ]
+}

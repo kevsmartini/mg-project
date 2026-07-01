@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO / descripción del fan film -->
+  <title>SHADOW MOSES — Fan Film generado con IA · Tactical Espionage Action</title>
+  <meta name="description" content="Cortometraje fan-made no oficial inspirado en Metal Gear Solid, con cada plano generado mediante inteligencia artificial. Homenaje a la obra de Hideo Kojima.">
+  <meta name="theme-color" content="#0a0e0a">
+
+  <!-- Google Fonts: Share Tech Mono (HUD/titulares) + VT323 (terminal CRT/CODEC).
+       preconnect acelera la conexión al servidor de fuentes. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Press Start 2P: fuente pixelada "blocky" para el rótulo CALL (parecida a la imagen) -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Enlace de accesibilidad: saltar directo al contenido con el teclado -->
+  <a href="#main" class="skip-link">Saltar al contenido</a>
+
+  <!-- Capa de atmósfera CRT (scanlines + flicker). Decorativa: aria-hidden. -->
+  <div class="crt-overlay" aria-hidden="true"></div>
+
+  <!-- ===== BARRA HUD SUPERIOR FIJA con datos ambientales ===== -->
+  <header class="hud-bar">
+    <div class="hud-bar__seg hud-bar__status">
+      <span class="hud-text">SHADOW MOSES ISLAND</span>
+    </div>
+    <div class="hud-bar__seg hud-bar__seg--center">
+      <span class="hud-bar__label">ALASKA · FOX ARCHIPELAGO</span>
+    </div>
+    <div class="hud-bar__seg">
+      <!-- Coordenadas ambientales (ficticias) + reloj vivo actualizado por JS -->
+      <span class="hud-bar__label hud-bar__coords">64°38'N 172°30'W</span>
+      <span class="hud-bar__value" id="hud-clock" aria-hidden="true">--:--:--</span>
+      <span class="hud-bar__label hud-bar__classified">CLASSIFIED</span>
+    </div>
+  </header>
+
+  <!-- ===== HERO INMERSIVO A PANTALLA COMPLETA ===== -->
+  <main id="main">
+    <section class="hero">
+      <div class="hero__inner">
+        <!-- Frecuencia CODEC como "eyebrow" ambiental -->
+        <p class="hero__freq">// FREQ 140.15 · CANAL ABIERTO</p>
+
+        <!-- Título con glitch. data-text alimenta las capas ::before/::after.
+             Es una versión TIPOGRÁFICA propia, no el logotipo oficial. -->
+        <h1 class="glitch" data-text="SHADOW MOSES">SHADOW MOSES</h1>
+
+        <!-- Tagline clásico de la saga -->
+        <p class="tagline">TACTICAL ESPIONAGE ACTION</p>
+
+        <!-- Deja claro que es un fan film hecho con IA -->
+        <p class="hero__subtitle">
+          Cortometraje <strong>fan-made no oficial</strong>. Cada plano —imagen,
+          animación y voz— generado con inteligencia artificial. Un homenaje a
+          Metal&nbsp;Gear&nbsp;Solid.
+        </p>
+
+        <!-- Línea que se "teclea" al cargar (rellenada por js/main.js).
+             role=status para que los lectores de pantalla anuncien el mensaje. -->
+        <p class="hero__typed" data-typed="&gt; Estableciendo enlace CODEC con Shadow Moses..." role="status"></p>
+
+        <div class="hero__actions">
+          <!-- Botón de acción estilo videojuego -->
+          <a href="proyecto.html" class="btn">&gt; ENTER MISSION</a>
+        </div>
+
+        <!-- Micro-interacción del "!" de alerta (hover/focus muestra la cajita) -->
+        <div class="alert-badge" tabindex="0" role="button" aria-label="Estado de alerta: infiltración detectada">
+          !
+          <span class="alert-badge__box">! ALERT · INFILTRATION</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Caja de alerta "!" que parpadea a pantalla (activada por JS) -->
+  <div class="alert-flash" id="alert-flash" aria-hidden="true">!</div>
+
+  <!-- ===== PANTALLA DE LLAMADA ENTRANTE (paso previo al CODEC) =====
+       ENTER MISSION la abre: fondo negro con la caja "CALL" (estilo alerta
+       MGS) y "CLICK TO ANSWER". Suena codec-audio.mp3 en bucle hasta que el
+       usuario hace clic; al responder suena codec-answer.mp3 y arranca el
+       CODEC. Toda la pantalla es "responder" (role=button). Oculta por defecto. -->
+  <div id="call-overlay" class="call-screen" role="button" tabindex="-1"
+       aria-label="Llamada entrante. Pulsa para responder." hidden>
+    <div class="call-screen__box" aria-hidden="true">CALL</div>
+    <!-- El texto cambia según el tamaño de pantalla (ver CSS):
+         "CLICK" en escritorio, "TAP" en móvil/táctil. -->
+    <p class="call-screen__hint">
+      <span class="call-screen__hint-desktop">CLICK TO ANSWER</span>
+      <span class="call-screen__hint-mobile">TAP TO ANSWER</span>
+    </p>
+    <!-- Tono de llamada (bucle) + sonido de respuesta -->
+    <audio id="call-ring" src="assets/audio/codec-audio.mp3" loop preload="auto"></audio>
+    <audio id="call-answer" src="assets/audio/codec-answer.mp3" preload="auto"></audio>
+  </div>
+
+  <!-- ===== OVERLAY DE TRANSICIÓN CODEC =====
+       Extraído de la antigua demo autónoma. Oculto por defecto (atributo
+       hidden). Se activa al pulsar "ENTER MISSION" (el clic desbloquea el
+       audio). Al terminar la voz o pulsar SKIP redirige a proyecto.html.
+       role=dialog + aria-modal: se anuncia como capa modal. -->
+  <div id="codec-overlay" class="codec-tx" role="dialog" aria-modal="true"
+       aria-label="Transmisión CODEC entrante" hidden>
+
+    <!-- Indicador REC (grabación) -->
+    <div class="codec-tx__rec"><b aria-hidden="true"></b>REC · CLASSIFIED</div>
+
+    <div class="codec-tx__box">
+      <!-- Cabecera: frecuencia + estado de la llamada -->
+      <div class="codec-tx__freq">
+        <span>CODEC · FREQ <span class="codec-tx__num">140.15</span></span>
+        <span class="codec-tx__status" id="codec-status">CALLING...</span>
+      </div>
+
+      <!-- Retratos: siluetas SVG genéricas (sin arte con copyright) -->
+      <div class="codec-tx__faces">
+        <div class="codec-tx__face" id="codec-face-colonel">
+          <div class="codec-tx__portrait">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="#8cff9e">
+              <circle cx="50" cy="34" r="17"/>
+              <path d="M50 54c-20 0-32 14-34 34h68c-2-20-14-34-34-34z"/>
+              <rect x="30" y="30" width="40" height="6" opacity=".6"/>
+            </g></svg>
+          </div>
+          <div class="codec-tx__name">COLONEL</div>
+        </div>
+        <div class="codec-tx__face" id="codec-face-snake">
+          <div class="codec-tx__portrait">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><g fill="#8cff9e">
+              <circle cx="50" cy="36" r="17"/>
+              <rect x="31" y="27" width="38" height="7" opacity=".85"/>
+              <path d="M50 56c-20 0-32 14-34 34h68c-2-20-14-34-34-34z"/>
+            </g></svg>
+          </div>
+          <div class="codec-tx__name">SNAKE</div>
+        </div>
+      </div>
+
+      <!-- Onda de audio (barras generadas por JS) -->
+      <div class="codec-tx__wave" id="codec-wave" aria-hidden="true"></div>
+
+      <!-- Subtítulos sincronizados. aria-live para lectores de pantalla. -->
+      <div class="codec-tx__subs">
+        <span id="codec-subtext" aria-live="polite"></span><span class="codec-tx__caret" aria-hidden="true"></span>
+      </div>
+
+      <!-- Barra de progreso de la transmisión -->
+      <div class="codec-tx__conn">
+        <div class="codec-tx__conn-label">ESTABLISHING SECURE CHANNEL</div>
+        <div class="codec-tx__bar"><i id="codec-bar"></i></div>
+      </div>
+    </div>
+
+    <!-- SKIP siempre visible -->
+    <button type="button" class="codec-tx__skip" id="codec-skip">&gt; SKIP TRANSMISSION</button>
+
+    <!-- Voz de Snake. El clic en ENTER MISSION es el gesto que la desbloquea. -->
+    <audio id="codec-voice" preload="auto" src="assets/audio/snake-intro.mp3"></audio>
+
+    <!-- Mute persistente -->
+    <button type="button" class="codec-tx__mute" id="codec-mute" aria-pressed="false">🔊 SOUND: ON</button>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

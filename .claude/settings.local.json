@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p assets/img assets/audio assets/video assets/fonts)",
+      "Bash(mv \"img/WhatsApp Image 2026-06-23 at 20.44.06.jpeg\"      assets/img/poster.jpg)",
+      "Bash(mv \"img/WhatsApp Image 2026-06-24 at 22.24.47.jpeg\"      assets/img/codec.jpg)",
+      "Bash(mv \"img/WhatsApp Image 2026-06-23 at 22.15.47.jpeg\"      assets/img/dock-b1.jpg)",
+      "Bash(mv \"img/WhatsApp Image 2026-06-24 at 22.26.29 \\(1\\).jpeg\"  assets/img/perimeter.jpg)"
+    ]
+  }
+}
