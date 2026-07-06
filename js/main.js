@@ -564,6 +564,22 @@
       return Promise.resolve(true);
     };
 
+    // Robust autoplay: browsers block audible playback after a navigation
+    // (the gesture from the intro doesn't carry over). So if the audible
+    // attempt is rejected, we start MUTED — always allowed — and immediately
+    // unmute: an element that is already playing stays audible without a
+    // fresh gesture. Resolves true if playback ended up running.
+    const startPlayback = () =>
+      tryPlay().then((ok) => {
+        if (ok) return true;
+        audio.muted = true;
+        return tryPlay().then((ok2) => {
+          audio.muted = false; // reveal the sound (or reflect the block)
+          syncMute();
+          return ok2;
+        });
+      });
+
     // Keeps the play/pause icon in sync with the real state of the audio
     const syncToggle = () => {
       const playing = !audio.paused;
@@ -583,9 +599,11 @@
         window.addEventListener("pointerdown", kickstart, { once: true });
         window.addEventListener("keydown", kickstart, { once: true });
       };
-      // We try to play. If we come from the intro it's usually allowed on its own;
-      // if the browser blocks it, it will start on the user's first gesture.
-      tryPlay().then((ok) => {
+      // Coming from the intro: force the autoplay (audible, else muted-then-
+      // unmute). Direct visit: a plain attempt, which browsers usually block.
+      // Either way, if nothing starts we arm the user's first gesture.
+      const attempt = fromIntro ? startPlayback : tryPlay;
+      attempt().then((ok) => {
         if (!ok) armFirstGesture();
       });
       // On a direct visit (without going through the intro) autoplay with sound
