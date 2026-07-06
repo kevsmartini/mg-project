@@ -1,27 +1,27 @@
 /* =============================================================================
-   SHADOW MOSES · Fan Film — Interactividad (JavaScript vanilla)
+   SHADOW MOSES · Fan Film — Interactivity (vanilla JavaScript)
    -----------------------------------------------------------------------------
-   Funciones incluidas:
-     1. Reloj HUD en vivo
-     2. Efecto de texto "tecleado" en titulares/diálogos clave
-     3. Aparición suave de secciones al hacer scroll (IntersectionObserver)
-     4. Micro-interacción del "!" de alerta (flash al llegar a la galería)
-     5. Lightbox de la galería (abrir, cerrar, teclado)
-   Todo respeta prefers-reduced-motion: si está activo, se desactivan el
-   tecleo, el flash de alerta y las animaciones agresivas.
+   Included features:
+     1. Live HUD clock
+     2. "Typed" text effect on key headings/dialogs
+     3. Smooth section reveal on scroll (IntersectionObserver)
+     4. Alert "!" micro-interaction (flash when reaching the gallery)
+     5. Gallery lightbox (open, close, keyboard)
+   Everything respects prefers-reduced-motion: if enabled, the typing, the
+   alert flash and the more aggressive animations are disabled.
    ============================================================================= */
 
 (function () {
   "use strict";
 
-  // ¿El usuario pide menos movimiento? Consultamos la media query una sola vez.
+  // Does the user request reduced motion? We check the media query only once.
   const REDUCED_MOTION = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
 
   /* -------------------------------------------------------------------------
-     1. RELOJ HUD EN VIVO
-     Actualiza cualquier elemento #hud-clock con la hora en formato 24h.
+     1. LIVE HUD CLOCK
+     Updates any #hud-clock element with the time in 24h format.
      ------------------------------------------------------------------------- */
   function initClock() {
     const clock = document.getElementById("hud-clock");
@@ -40,16 +40,16 @@
   }
 
   /* -------------------------------------------------------------------------
-     2. EFECTO DE TEXTO "TECLEADO"
-     Cualquier elemento con [data-typed] escribe su contenido letra a letra.
-     Con prefers-reduced-motion se muestra el texto completo al instante.
-     El texto viene del atributo (ya des-escapado por el navegador).
+     2. "TYPED" TEXT EFFECT
+     Any element with [data-typed] writes its content letter by letter.
+     With prefers-reduced-motion the full text is shown instantly.
+     The text comes from the attribute (already un-escaped by the browser).
      ------------------------------------------------------------------------- */
   function typeText(el, text, speed) {
     return new Promise((resolve) => {
       el.textContent = "";
 
-      // Cursor parpadeante al final mientras escribe
+      // Blinking cursor at the end while typing
       const cursor = document.createElement("span");
       cursor.className = "cursor";
       cursor.textContent = "_";
@@ -58,7 +58,7 @@
       let i = 0;
       const tick = () => {
         if (i < text.length) {
-          // Insertamos el carácter antes del cursor
+          // We insert the character before the cursor
           cursor.insertAdjacentText("beforebegin", text.charAt(i));
           i++;
           setTimeout(tick, speed);
@@ -77,24 +77,24 @@
       const text = el.getAttribute("data-typed") || el.textContent.trim();
 
       if (REDUCED_MOTION) {
-        // Sin animación: dejamos el texto tal cual, legible desde el inicio.
+        // No animation: we leave the text as is, readable from the start.
         el.textContent = text;
         return;
       }
-      // Empezamos con el elemento vacío y tecleamos.
+      // We start with the element empty and type it out.
       typeText(el, text, 45);
     });
   }
 
   /* -------------------------------------------------------------------------
-     3. APARICIÓN SUAVE AL HACER SCROLL
-     Añade la clase .is-visible a los .reveal cuando entran en el viewport.
+     3. SMOOTH REVEAL ON SCROLL
+     Adds the .is-visible class to .reveal elements when they enter the viewport.
      ------------------------------------------------------------------------- */
   function initReveal() {
     const items = document.querySelectorAll(".reveal");
     if (!items.length) return;
 
-    // Sin IntersectionObserver o con movimiento reducido: mostramos todo ya.
+    // Without IntersectionObserver or with reduced motion: show everything now.
     if (REDUCED_MOTION || !("IntersectionObserver" in window)) {
       items.forEach((el) => el.classList.add("is-visible"));
       return;
@@ -105,7 +105,7 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            obs.unobserve(entry.target); // una sola vez
+            obs.unobserve(entry.target); // only once
           }
         });
       },
@@ -116,23 +116,23 @@
   }
 
   /* -------------------------------------------------------------------------
-     4. MICRO-INTERACCIÓN DEL "!" DE ALERTA
-     Cuando la sección clave (la galería) entra en pantalla por primera vez,
-     parpadea la caja "!" característica. Sin sonido, para no molestar.
+     4. ALERT "!" MICRO-INTERACTION
+     When the key section (the gallery) enters the screen for the first time,
+     the characteristic "!" box flashes. No sound, so it doesn't disturb.
      ------------------------------------------------------------------------- */
   function initAlert() {
     const flash = document.getElementById("alert-flash");
     if (!flash || REDUCED_MOTION) return;
 
-    // Reutilizable: dispara el flash y lo limpia al terminar la animación.
+    // Reusable: triggers the flash and clears it when the animation ends.
     const triggerFlash = () => {
       flash.classList.remove("is-active");
-      // Forzamos reflow para poder reiniciar la animación si se repite.
+      // Force a reflow so the animation can restart if repeated.
       void flash.offsetWidth;
       flash.classList.add("is-active");
     };
 
-    // En proyecto.html: al llegar a la galería.
+    // In proyecto.html: when reaching the gallery.
     const key = document.getElementById("galeria");
     if (key && "IntersectionObserver" in window) {
       const obs = new IntersectionObserver(
@@ -140,7 +140,7 @@
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               triggerFlash();
-              obs.unobserve(entry.target); // solo la primera vez
+              obs.unobserve(entry.target); // only the first time
             }
           });
         },
@@ -149,7 +149,7 @@
       obs.observe(key);
     }
 
-    // En la landing: al pasar el ratón por el botón de misión, un guiño "!".
+    // On the landing: hovering over the mission button gives a "!" wink.
     const cta = document.querySelector(".hero .btn");
     if (cta) {
       let armed = true;
@@ -157,16 +157,16 @@
         if (!armed) return;
         armed = false;
         triggerFlash();
-        // Rearmamos tras unos segundos para que no sature.
+        // Re-arm after a few seconds so it doesn't saturate.
         setTimeout(() => (armed = true), 5000);
       });
     }
   }
 
   /* -------------------------------------------------------------------------
-     5. LIGHTBOX DE LA GALERÍA
-     Abre la imagen a pantalla completa. Cierra con la X, con clic en el
-     fondo o con la tecla Escape. Gestiona el foco por accesibilidad.
+     5. GALLERY LIGHTBOX
+     Opens the image full-screen. Closes with the X, with a click on the
+     background or with the Escape key. Manages focus for accessibility.
      ------------------------------------------------------------------------- */
   function initLightbox() {
     const gallery = document.getElementById("gallery");
@@ -176,14 +176,14 @@
     const imgEl = document.getElementById("lightbox-img");
     const captionEl = document.getElementById("lightbox-caption");
     const closeBtn = document.getElementById("lightbox-close");
-    let lastFocused = null; // para devolver el foco al cerrar
+    let lastFocused = null; // to return focus on close
 
     const open = (src, caption, alt) => {
       imgEl.src = src;
-      imgEl.alt = alt || caption || "Imagen ampliada";
+      imgEl.alt = alt || caption || "Enlarged image";
       captionEl.textContent = caption || "";
       lightbox.classList.add("is-open");
-      document.body.style.overflow = "hidden"; // bloquea scroll de fondo
+      document.body.style.overflow = "hidden"; // blocks background scroll
       lastFocused = document.activeElement;
       closeBtn.focus();
     };
@@ -192,10 +192,10 @@
       lightbox.classList.remove("is-open");
       document.body.style.overflow = "";
       imgEl.src = "";
-      if (lastFocused) lastFocused.focus(); // devuelve el foco al disparador
+      if (lastFocused) lastFocused.focus(); // returns focus to the trigger
     };
 
-    // Delegación de eventos: un único listener para toda la galería.
+    // Event delegation: a single listener for the whole gallery.
     gallery.addEventListener("click", (e) => {
       const item = e.target.closest(".gallery__item");
       if (!item) return;
@@ -209,35 +209,35 @@
 
     closeBtn.addEventListener("click", close);
 
-    // Clic en el fondo (fuera de la figura) cierra el visor.
+    // Clicking the background (outside the figure) closes the viewer.
     lightbox.addEventListener("click", (e) => {
       if (e.target === lightbox) close();
     });
 
-    // Escape cierra el visor.
+    // Escape closes the viewer.
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && lightbox.classList.contains("is-open")) close();
     });
   }
 
   /* -------------------------------------------------------------------------
-     6. TRANSICIÓN CODEC (overlay de intro de la landing)
-     Clic en "ENTER MISSION" -> abre el overlay CODEC y arranca la voz
-     (assets/audio/snake-intro.mp3) -> subtítulos sincronizados con el audio
-     -> al terminar la voz ('ended') o pulsar SKIP -> redirige a proyecto.html.
-     El audio SOLO puede sonar tras el clic (los navegadores bloquean autoplay).
-     Si el mp3 no carga/reproduce, cae a un temporizador de respaldo para que
-     el flujo nunca se quede colgado.
+     6. CODEC TRANSITION (landing intro overlay)
+     Click on "ENTER MISSION" -> opens the CODEC overlay and starts the voice
+     (assets/audio/snake-intro.mp3) -> subtitles synced with the audio
+     -> when the voice ends ('ended') or SKIP is pressed -> redirects to proyecto.html.
+     The audio can ONLY play after the click (browsers block autoplay).
+     If the mp3 fails to load/play, it falls back to a backup timer so the
+     flow never gets stuck.
      ------------------------------------------------------------------------- */
   function initCodecTransition() {
     const overlay = document.getElementById("codec-overlay");
-    if (!overlay) return; // solo existe en la landing
+    if (!overlay) return; // only exists on the landing page
 
     /* ===========================================================
-       GUION DE SUBTÍTULOS — EDITA AQUÍ.
-       't' = segundo de inicio de cada línea. Tiempos calibrados con
-       los timestamps por palabra de snake-intro_eng.json (cada 't'
-       es el inicio de la primera palabra hablada de esa frase).
+       SUBTITLE SCRIPT — EDIT HERE.
+       't' = start second of each line. Timings calibrated with the
+       per-word timestamps from snake-intro_eng.json (each 't' is the
+       start of the first spoken word of that phrase).
        =========================================================== */
     const SCRIPT = [
       { t: 0.26, txt: "Colonel... I'm in." },              // "Colonel," 0.258
@@ -248,12 +248,12 @@
       { t: 13.58, txt: "Kept you waiting, huh?" },         // "Kept" 13.579
       { t: 15.12, txt: "Let's move." },                    // "Let's" 15.119
     ];
-    // Duración de respaldo (s) si el audio no aporta metadatos: el audio
-    // real termina en ~15.7 s (end_time del segmento en el JSON).
+    // Fallback duration (s) if the audio provides no metadata: the real
+    // audio ends at ~15.7 s (end_time of the segment in the JSON).
     const DURATION = 15.7;
 
-    // --- Referencias del DOM ---
-    const trigger = document.querySelector(".hero .btn"); // botón ENTER MISSION
+    // --- DOM references ---
+    const trigger = document.querySelector(".hero .btn"); // ENTER MISSION button
     const statusEl = document.getElementById("codec-status");
     const waveEl = document.getElementById("codec-wave");
     const subEl = document.getElementById("codec-subtext");
@@ -263,7 +263,7 @@
     const voice = document.getElementById("codec-voice");
     const snakeFace = document.getElementById("codec-face-snake");
 
-    // --- Estado ---
+    // --- State ---
     let muted = false;
     let rafWave = 0;
     let rafTimer = 0;
@@ -275,7 +275,7 @@
     let startTs = 0;
     let actx = null;
 
-    // --- Onda de audio: barras creadas una sola vez ---
+    // --- Audio wave: bars created only once ---
     const BAR_COUNT = 28;
     for (let i = 0; i < BAR_COUNT; i++)
       waveEl.appendChild(document.createElement("span"));
@@ -294,7 +294,7 @@
       loop();
     }
 
-    // Subtítulo "tecleado" (instantáneo si hay movimiento reducido)
+    // "Typed" subtitle (instant if reduced motion)
     function typeLine(text) {
       subEl.textContent = "";
       if (REDUCED_MOTION) {
@@ -309,7 +309,7 @@
       }, 28);
     }
 
-    // Beep de conexión con Web Audio API (sin archivo extra)
+    // Connection beep with the Web Audio API (no extra file)
     function beep(freq, dur) {
       if (muted) return;
       try {
@@ -325,11 +325,11 @@
         o.start();
         o.stop(actx.currentTime + dur);
       } catch (e) {
-        /* Web Audio no disponible: lo ignoramos */
+        /* Web Audio not available: we ignore it */
       }
     }
 
-    // Sincroniza el subtítulo activo + la barra de progreso según el tiempo t
+    // Syncs the active subtitle + the progress bar based on time t
     function runTimeline(t, dur) {
       let idx = -1;
       for (let i = 0; i < SCRIPT.length; i++) if (t >= SCRIPT[i].t) idx = i;
@@ -340,9 +340,9 @@
       barEl.style.right = Math.max(0, 100 - (t / dur) * 100) + "%";
     }
 
-    // Respaldo por temporizador si el audio no carga/reproduce
+    // Timer fallback if the audio doesn't load/play
     function runTimerFallback() {
-      if (timerStarted || finished) return; // no arrancar dos veces
+      if (timerStarted || finished) return; // don't start twice
       timerStarted = true;
       startTs = performance.now();
       const tick = () => {
@@ -354,8 +354,8 @@
       rafTimer = requestAnimationFrame(tick);
     }
 
-    // Re-arma el "seguro": si 'ended' nunca dispara, forzamos el final.
-    // Usa la duración real del audio cuando ya está disponible.
+    // Re-arms the "safety": if 'ended' never fires, we force the ending.
+    // Uses the real audio duration when it's already available.
     function armSafety() {
       clearTimeout(safetyTimer);
       const dur =
@@ -365,9 +365,9 @@
       safetyTimer = setTimeout(finish, (dur + 3) * 1000);
     }
 
-    // Fin de la transmisión: para todo y REDIRIGE al proyecto
+    // End of the transmission: stops everything and REDIRECTS to the project
     function finish() {
-      if (finished) return; // evita redirecciones dobles
+      if (finished) return; // prevents double redirects
       finished = true;
       cancelAnimationFrame(rafWave);
       cancelAnimationFrame(rafTimer);
@@ -377,28 +377,28 @@
         voice.pause();
       } catch (e) {}
       snakeFace.classList.remove("is-talking");
-      overlay.classList.add("is-closing"); // fundido a negro
-      // Señal para proyecto.html: venimos de la intro (el usuario ya
-      // interactuó al pulsar ENTER MISSION), así la música puede arrancar
-      // automáticamente allí sin esperar otra interacción.
+      overlay.classList.add("is-closing"); // fade to black
+      // Signal for proyecto.html: we come from the intro (the user already
+      // interacted by pressing ENTER MISSION), so the music can start
+      // automatically there without waiting for another interaction.
       try {
         sessionStorage.setItem("sm_autoplay", "1");
       } catch (e) {}
-      // ▼▼▼ REDIRECCIÓN A LA PÁGINA DEL PROYECTO (fin de la intro CODEC) ▼▼▼
-      // Retardo breve para que se vea el fundido antes de cambiar de página.
+      // ▼▼▼ REDIRECT TO THE PROJECT PAGE (end of the CODEC intro) ▼▼▼
+      // Brief delay so the fade is visible before changing pages.
       setTimeout(() => {
         window.location.href = "proyecto.html";
       }, 600);
     }
 
-    // Muestra el CODEC (ambiente de conexión: beeps, estado, onda). No arranca
-    // la voz todavía, para poder retrasarla y que no se solape con otros audios.
+    // Shows the CODEC (connection ambience: beeps, status, wave). It does not
+    // start the voice yet, so it can be delayed and not overlap other audio.
     function showCodec() {
       overlay.hidden = false;
-      document.body.style.overflow = "hidden"; // bloquea scroll de fondo
-      skipBtn.focus(); // foco al control principal
+      document.body.style.overflow = "hidden"; // blocks background scroll
+      skipBtn.focus(); // focus on the main control
 
-      // Beep doble de conexión
+      // Double connection beep
       beep(660, 0.08);
       setTimeout(() => beep(660, 0.08), 140);
       // CALLING... -> CONNECTED
@@ -409,71 +409,71 @@
       animateWave(true);
     }
 
-    // Arranca la VOZ (snake-intro): retrato hablando, subtítulos y redirección.
+    // Starts the VOICE (snake-intro): portrait talking, subtitles and redirect.
     function startVoice() {
-      snakeFace.classList.add("is-talking"); // Snake empieza a "hablar"
+      snakeFace.classList.add("is-talking"); // Snake starts to "talk"
       voice.muted = muted;
       try {
         voice.currentTime = 0;
       } catch (e) {}
-      // Subtítulos sincronizados con el tiempo real del audio
+      // Subtitles synced with the real time of the audio
       voice.ontimeupdate = () =>
         runTimeline(voice.currentTime, voice.duration || DURATION);
-      voice.onended = finish; // al terminar la voz -> redirige
-      voice.onerror = runTimerFallback; // si el archivo falla -> respaldo
-      voice.onloadedmetadata = armSafety; // re-arma el seguro con la duración real
+      voice.onended = finish; // when the voice ends -> redirect
+      voice.onerror = runTimerFallback; // if the file fails -> fallback
+      voice.onloadedmetadata = armSafety; // re-arm the safety with the real duration
 
       const playPromise = voice.play();
       if (playPromise && typeof playPromise.then === "function") {
         playPromise.catch(() => runTimerFallback());
       }
-      armSafety(); // seguro inicial (se re-arma con la metadata real)
+      armSafety(); // initial safety (re-armed with the real metadata)
     }
 
-    // Secuencia completa (usada si se entra sin pasar por la pantalla de llamada)
+    // Full sequence (used if entering without going through the call screen)
     function startCodec() {
       showCodec();
       startVoice();
     }
 
-    // --- PANTALLA DE LLAMADA ENTRANTE (paso previo al CODEC) ---
+    // --- INCOMING CALL SCREEN (step before the CODEC) ---
     const callOverlay = document.getElementById("call-overlay");
-    const ring = document.getElementById("call-ring");   // tono en bucle
-    const answer = document.getElementById("call-answer"); // sonido al responder
+    const ring = document.getElementById("call-ring");   // looping ring tone
+    const answer = document.getElementById("call-answer"); // answer sound
     let answered = false;
 
-    // Abre la pantalla "CALL" y arranca el tono en bucle (el clic en ENTER
-    // MISSION es el gesto que desbloquea el audio).
+    // Opens the "CALL" screen and starts the looping ring tone (the click on
+    // ENTER MISSION is the gesture that unlocks the audio).
     function openCall() {
-      if (!callOverlay) { startCodec(); return; } // sin pantalla: directo al CODEC
+      if (!callOverlay) { startCodec(); return; } // no screen: straight to the CODEC
       answered = false;
       callOverlay.hidden = false;
-      document.body.style.overflow = "hidden"; // bloquea scroll de fondo
+      document.body.style.overflow = "hidden"; // blocks background scroll
       callOverlay.setAttribute("tabindex", "0");
       callOverlay.focus();
       if (ring) {
         ring.muted = muted;
         try { ring.currentTime = 0; } catch (e) {}
-        ring.play().catch(() => {}); // si falla, el tono simplemente no suena
+        ring.play().catch(() => {}); // if it fails, the tone simply doesn't play
       }
     }
 
-    // Responder: corta el tono, suena codec-answer.mp3 y, al terminar,
-    // arranca la transmisión CODEC (que ya reproduce la voz).
+    // Answer: cuts the tone, plays codec-answer.mp3 and, when it ends,
+    // starts the CODEC transmission (which already plays the voice).
     function answerCall() {
-      if (answered) return; // evita respuestas dobles
+      if (answered) return; // prevents double answers
       answered = true;
       if (ring) ring.pause();
 
-      // Sonido de respuesta (suena por encima durante el fundido).
+      // Answer sound (plays over the top during the fade).
       if (answer) {
         answer.muted = muted;
         try { answer.currentTime = 0; } catch (e) {}
         answer.play().catch(() => {});
       }
 
-      // Mostramos el CODEC (ambiente de conexión) ya, debajo, y fundimos la
-      // pantalla de llamada para descubrirlo (crossfade suave por opacidad).
+      // We show the CODEC (connection ambience) now, underneath, and fade the
+      // call screen to reveal it (a smooth crossfade by opacity).
       showCodec();
       if (callOverlay) {
         callOverlay.classList.add("is-answering");
@@ -482,11 +482,11 @@
           callOverlay.classList.remove("is-answering");
         };
         callOverlay.addEventListener("transitionend", hide, { once: true });
-        setTimeout(hide, 700); // respaldo por si transitionend no dispara
+        setTimeout(hide, 700); // fallback in case transitionend doesn't fire
       }
 
-      // La VOZ arranca 1 segundo después de responder (tras oírse el sonido
-      // de respuesta), sin esperar a que termine del todo.
+      // The VOICE starts 1 second after answering (once the answer sound has
+      // been heard), without waiting for it to finish completely.
       let voiceStarted = false;
       const beginVoice = () => {
         if (voiceStarted || finished) return;
@@ -499,11 +499,11 @@
     // --- Listeners ---
     if (trigger) {
       trigger.addEventListener("click", (e) => {
-        e.preventDefault(); // no navegamos directo: abrimos la llamada
+        e.preventDefault(); // we don't navigate directly: we open the call
         openCall();
       });
     }
-    // Toda la pantalla de llamada responde (clic o Enter/Espacio)
+    // The whole call screen answers (click or Enter/Space)
     if (callOverlay) {
       callOverlay.addEventListener("click", answerCall);
       callOverlay.addEventListener("keydown", (e) => {
@@ -511,11 +511,11 @@
       });
     }
     skipBtn.addEventListener("click", finish);
-    // Esc también salta la transmisión
+    // Esc also skips the transmission
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && !overlay.hidden && !finished) finish();
     });
-    // Mute persistente con estado accesible (aria-pressed)
+    // Persistent mute with accessible state (aria-pressed)
     muteBtn.addEventListener("click", () => {
       muted = !muted;
       voice.muted = muted;
@@ -525,33 +525,37 @@
   }
 
   /* -------------------------------------------------------------------------
-     7. MÚSICA DE FONDO (solo proyecto.html)
-     La pista arranca 2 s después de cargar. Controles: play/pausa, stop
-     (detiene + rebobina) y mute. Los navegadores bloquean el autoplay con
-     sonido hasta que el usuario interactúa; si se bloquea, la música arranca
-     en el primer gesto del usuario (clic/tecla), como respaldo.
+     7. BACKGROUND MUSIC (proyecto.html only)
+     The track starts 2 s after loading. Controls: play/pause, stop
+     (stops + rewinds) and mute. Browsers block autoplay with sound until
+     the user interacts; if it's blocked, the music starts on the user's
+     first gesture (click/key), as a fallback.
      ------------------------------------------------------------------------- */
   function initBackgroundMusic() {
     const audio = document.getElementById("bg-music");
-    if (!audio) return; // solo existe en proyecto.html
+    if (!audio) return; // only exists on proyecto.html
+
+    // Desktop-only: on mobile/touch (<= 560px, same breakpoint as the CSS that
+    // hides the player) we don't play the track nor wire up any controls.
+    if (window.matchMedia("(max-width: 560px)").matches) return;
 
     const toggleBtn = document.getElementById("bg-toggle");
     const stopBtn = document.getElementById("bg-stop");
     const muteBtn = document.getElementById("bg-mute");
 
-    audio.volume = 0.4; // nivel de fondo cómodo (no tapa la lectura)
+    audio.volume = 0.4; // comfortable background level (doesn't cover the reading)
 
-    // ¿Venimos de la intro CODEC? Si es así, el usuario ya interactuó en la
-    // landing, así que el navegador suele permitir la reproducción automática.
-    // Consumimos la señal (se usa una sola vez).
+    // Are we coming from the CODEC intro? If so, the user already interacted on
+    // the landing, so the browser usually allows automatic playback.
+    // We consume the signal (it's used only once).
     let fromIntro = false;
     try {
       fromIntro = sessionStorage.getItem("sm_autoplay") === "1";
       sessionStorage.removeItem("sm_autoplay");
     } catch (e) {}
 
-    // Intenta reproducir; devuelve una promesa que resuelve a true/false
-    // según si el navegador permitió o no la reproducción.
+    // Tries to play; returns a promise that resolves to true/false
+    // depending on whether the browser allowed playback or not.
     const tryPlay = () => {
       const p = audio.play();
       if (p && typeof p.then === "function") {
@@ -560,17 +564,17 @@
       return Promise.resolve(true);
     };
 
-    // Mantiene el icono play/pausa sincronizado con el estado real del audio
+    // Keeps the play/pause icon in sync with the real state of the audio
     const syncToggle = () => {
       const playing = !audio.paused;
       toggleBtn.textContent = playing ? "❚❚" : "▶";
-      toggleBtn.setAttribute("aria-label", playing ? "Pausar música" : "Reproducir música");
+      toggleBtn.setAttribute("aria-label", playing ? "Pause music" : "Play music");
       toggleBtn.classList.toggle("is-active", playing);
     };
 
-    // --- ARRANQUE a los 2 segundos (siempre se respeta el retardo) ---
+    // --- START after 2 seconds (the delay is always respected) ---
     setTimeout(() => {
-      // Deja armado el arranque en el primer clic/tecla (una sola vez).
+      // Arms the start on the first click/key (only once).
       let armed = false;
       const armFirstGesture = () => {
         if (armed) return;
@@ -579,46 +583,46 @@
         window.addEventListener("pointerdown", kickstart, { once: true });
         window.addEventListener("keydown", kickstart, { once: true });
       };
-      // Intentamos reproducir. Si venimos de la intro suele permitirse solo;
-      // si el navegador lo bloquea, arrancará al primer gesto del usuario.
+      // We try to play. If we come from the intro it's usually allowed on its own;
+      // if the browser blocks it, it will start on the user's first gesture.
       tryPlay().then((ok) => {
         if (!ok) armFirstGesture();
       });
-      // En visita directa (sin pasar por la intro) el autoplay con sonido casi
-      // siempre está bloqueado: dejamos ya armado el arranque al primer gesto.
+      // On a direct visit (without going through the intro) autoplay with sound
+      // is almost always blocked: we arm the start on the first gesture already.
       if (!fromIntro) armFirstGesture();
     }, 2000);
 
-    // --- Controles ---
-    // Play / Pausa
+    // --- Controls ---
+    // Play / Pause
     toggleBtn.addEventListener("click", () => {
       if (audio.paused) tryPlay();
       else audio.pause();
     });
-    // Stop: pausa y vuelve al inicio de la pista
+    // Stop: pauses and returns to the start of the track
     stopBtn.addEventListener("click", () => {
       audio.pause();
       audio.currentTime = 0;
     });
-    // Refleja el estado de silencio en el botón de mute (icono + accesibilidad)
+    // Reflects the mute state on the mute button (icon + accessibility)
     const syncMute = () => {
       muteBtn.setAttribute("aria-pressed", String(audio.muted));
       muteBtn.textContent = audio.muted ? "🔇" : "🔊";
-      muteBtn.setAttribute("aria-label", audio.muted ? "Activar sonido de la música" : "Silenciar música");
+      muteBtn.setAttribute("aria-label", audio.muted ? "Unmute music" : "Mute music");
       muteBtn.classList.toggle("is-active", audio.muted);
     };
-    // Mute (alterna)
+    // Mute (toggles)
     muteBtn.addEventListener("click", () => {
       audio.muted = !audio.muted;
       syncMute();
     });
 
-    // Control de volumen: mueve audio.volume (0–1) según el slider (0–100).
+    // Volume control: moves audio.volume (0–1) based on the slider (0–100).
     const volume = document.getElementById("bg-volume");
     if (volume) {
       volume.addEventListener("input", () => {
         audio.volume = volume.value / 100;
-        // Si suben el volumen estando silenciado, quitamos el mute.
+        // If they raise the volume while muted, we remove the mute.
         if (audio.volume > 0 && audio.muted) {
           audio.muted = false;
           syncMute();
@@ -626,14 +630,14 @@
       });
     }
 
-    // El icono play/pausa reacciona a cualquier cambio de estado del audio
+    // The play/pause icon reacts to any change in the audio state
     audio.addEventListener("play", syncToggle);
     audio.addEventListener("pause", syncToggle);
     syncToggle();
   }
 
   /* -------------------------------------------------------------------------
-     ARRANQUE
+     STARTUP
      ------------------------------------------------------------------------- */
   function init() {
     initClock();
@@ -645,7 +649,7 @@
     initBackgroundMusic();
   }
 
-  // defer garantiza que el DOM esté listo, pero comprobamos por seguridad.
+  // defer guarantees the DOM is ready, but we check just in case.
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {

@@ -1057,7 +1057,7 @@ a:hover { text-decoration: underline; }
 .codec-tx__face { flex: 1; padding: 20px; position: relative; }
 .codec-tx__face + .codec-tx__face { border-left: 1px solid rgba(63, 125, 82, 0.3); }
 .codec-tx__portrait {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 4;
   width: 100%;
   max-width: 180px;
   margin: 0 auto;
@@ -1070,6 +1070,14 @@ a:hover { text-decoration: underline; }
   width: 100%; height: 100%;
   display: block;
   filter: drop-shadow(0 0 4px var(--green-glow));
+}
+.codec-tx__portrait img {
+  width: 100%; height: 100%;
+  display: block;
+  object-fit: cover;
+  /* Subtle boost + CODEC glow (portraits already have a green tint baked in) */
+  filter: brightness(1.08) contrast(1.05) saturate(1.15)
+    drop-shadow(0 0 4px var(--green-glow));
 }
 /* scanlines dentro del retrato */
 .codec-tx__portrait::after {
@@ -1205,6 +1213,10 @@ a:hover { text-decoration: underline; }
   border-radius: var(--radius);
   backdrop-filter: blur(2px);
   font-family: var(--font-hud);
+}
+/* Background music is desktop-only: hide the whole player on mobile/touch. */
+@media (max-width: 560px) {
+  .bg-audio { display: none; }
 }
 .bg-audio__title {
   font-size: 0.6rem;
