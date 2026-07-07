@@ -84,34 +84,54 @@
           <span class="section__code">02 / COMMS</span>
         </div>
 
-        <div class="codec hud-frame">
+        <!-- Interactive CODEC: dial a frequency and CALL. Behaviour lives in
+             js/codec-interactive.js — this markup only adds the hooks (dial,
+             CALL, signal indicator, portrait <img> slots) over the existing
+             design; nothing here is redesigned. -->
+        <div class="codec hud-frame" id="codec-widget">
           <span class="hud-frame__corners" aria-hidden="true"></span>
+
+          <!-- Live call-signal status (idle → dialing → ringing → connected) -->
+          <div class="codec__signal" aria-live="polite">SIGNAL: <span id="codec-signal">NONE</span></div>
+
           <div class="codec__screen">
-            <!-- Left portrait (generic silhouette, no copyrighted assets) -->
-            <div class="codec__portrait" aria-hidden="true">
-              <span>COMMANDER</span>
+            <!-- Left portrait: COMMANDER (becomes Snake once connected) -->
+            <div class="codec__portrait" id="codec-portrait-commander">
+              <img class="codec__photo" id="codec-photo-commander" alt="" hidden>
+              <span id="codec-name-commander">COMMANDER</span>
             </div>
 
-            <!-- Frequency + animated audio waves -->
+            <!-- Frequency dial + audio bars + CALL -->
             <div class="codec__freq">
-              <div class="codec__freq-value">140.15</div>
+              <div class="codec__dial">
+                <button type="button" class="codec__dial-btn" id="codec-freq-up" aria-label="Increase frequency">▲</button>
+                <input type="text" class="codec__freq-value" id="codec-freq"
+                       inputmode="decimal" maxlength="6" autocomplete="off"
+                       aria-label="CODEC frequency (type it, or use the arrows)" value="140.15">
+                <button type="button" class="codec__dial-btn" id="codec-freq-down" aria-label="Decrease frequency">▼</button>
+              </div>
               <div class="codec__freq-label">MEM · TUNE</div>
-              <div class="codec__waves" aria-hidden="true">
+              <div class="codec__waves" id="codec-waves" aria-hidden="true">
                 <span></span><span></span><span></span><span></span>
                 <span></span><span></span><span></span>
               </div>
+              <button type="button" class="codec__call" id="codec-call">&gt; CALL</button>
             </div>
 
-            <!-- Right portrait -->
-            <div class="codec__portrait" aria-hidden="true">
-              <span>OPERATIVE</span>
+            <!-- Right portrait: OPERATIVE (becomes the dialed character) -->
+            <div class="codec__portrait" id="codec-portrait-operative">
+              <img class="codec__photo" id="codec-photo-operative" alt="" hidden>
+              <span id="codec-name-operative">OPERATIVE</span>
             </div>
           </div>
 
-          <!-- Dialog box with text typed by JS (fallback in the HTML) -->
-          <p class="codec__dialog" data-typed="&gt; This is Command. Do you read me? Operation SHADOW MOSES is underway. Good luck.">
-            &gt; This is Command. Do you read me? Operation SHADOW MOSES is underway. Good luck.
-          </p>
+          <!-- Dialog box: subtitle output during a call (idle = empty + caret) -->
+          <p class="codec__dialog" id="codec-dialog" aria-live="polite"></p>
+
+          <!-- Ring tone: reuses the existing CODEC call sound. Voice src is set
+               per-frequency by js/codec-interactive.js from FREQUENCIES. -->
+          <audio id="codec-ringtone" src="assets/audio/codec-audio.mp3" preload="auto"></audio>
+          <audio id="codec-voice" preload="none"></audio>
         </div>
       </section>
 
@@ -272,5 +292,7 @@
   </div>
 
   <script src="js/main.js" defer></script>
+  <!-- Interactive CODEC (dial/call state machine). Independent of main.js. -->
+  <script src="js/codec-interactive.js" defer></script>
 </body>
 </html>

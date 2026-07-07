@@ -1,0 +1,177 @@
+{
+  "language_code": "eng",
+  "segments": [
+    {
+      "text": "Colonel, this whole mission is running on generative models. Kojima never saw this coming. Cutting the line",
+      "start_time": 0.119,
+      "end_time": 7.779,
+      "words": [
+        {
+          "text": "Colonel,",
+          "start_time": 0.119,
+          "end_time": 0.56
+        },
+        {
+          "text": " ",
+          "start_time": 0.56,
+          "end_time": 0.919
+        },
+        {
+          "text": "this",
+          "start_time": 0.919,
+          "end_time": 1.24
+        },
+        {
+          "text": " ",
+          "start_time": 1.24,
+          "end_time": 1.279
+        },
+        {
+          "text": "whole",
+          "start_time": 1.279,
+          "end_time": 1.579
+        },
+        {
+          "text": " ",
+          "start_time": 1.579,
+          "end_time": 1.659
+        },
+        {
+          "text": "mission",
+          "start_time": 1.659,
+          "end_time": 2.019
+        },
+        {
+          "text": " ",
+          "start_time": 2.019,
+          "end_time": 2.079
+        },
+        {
+          "text": "is",
+          "start_time": 2.079,
+          "end_time": 2.259
+        },
+        {
+          "text": " ",
+          "start_time": 2.259,
+          "end_time": 2.299
+        },
+        {
+          "text": "running",
+          "start_time": 2.299,
+          "end_time": 2.599
+        },
+        {
+          "text": " ",
+          "start_time": 2.599,
+          "end_time": 2.619
+        },
+        {
+          "text": "on",
+          "start_time": 2.619,
+          "end_time": 2.779
+        },
+        {
+          "text": " ",
+          "start_time": 2.779,
+          "end_time": 2.98
+        },
+        {
+          "text": "generative",
+          "start_time": 2.98,
+          "end_time": 3.48
+        },
+        {
+          "text": " ",
+          "start_time": 3.48,
+          "end_time": 3.599
+        },
+        {
+          "text": "models.",
+          "start_time": 3.599,
+          "end_time": 4.099
+        },
+        {
+          "text": " ",
+          "start_time": 4.099,
+          "end_time": 4.559
+        },
+        {
+          "text": "Kojima",
+          "start_time": 4.559,
+          "end_time": 5.079
+        },
+        {
+          "text": " ",
+          "start_time": 5.079,
+          "end_time": 5.119
+        },
+        {
+          "text": "never",
+          "start_time": 5.119,
+          "end_time": 5.299
+        },
+        {
+          "text": " ",
+          "start_time": 5.299,
+          "end_time": 5.459
+        },
+        {
+          "text": "saw",
+          "start_time": 5.46,
+          "end_time": 5.619
+        },
+        {
+          "text": " ",
+          "start_time": 5.619,
+          "end_time": 5.659
+        },
+        {
+          "text": "this",
+          "start_time": 5.659,
+          "end_time": 5.879
+        },
+        {
+          "text": " ",
+          "start_time": 5.879,
+          "end_time": 5.939
+        },
+        {
+          "text": "coming.",
+          "start_time": 5.94,
+          "end_time": 6.299
+        },
+        {
+          "text": " ",
+          "start_time": 6.299,
+          "end_time": 6.899
+        },
+        {
+          "text": "Cutting",
+          "start_time": 6.899,
+          "end_time": 7.179
+        },
+        {
+          "text": " ",
+          "start_time": 7.179,
+          "end_time": 7.219
+        },
+        {
+          "text": "the",
+          "start_time": 7.219,
+          "end_time": 7.279
+        },
+        {
+          "text": " ",
+          "start_time": 7.279,
+          "end_time": 7.399
+        },
+        {
+          "text": "line",
+          "start_time": 7.399,
+          "end_time": 7.779
+        }
+      ]
+    }
+  ]
+}

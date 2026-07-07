@@ -1,0 +1,167 @@
+{
+  "language_code": "eng",
+  "segments": [
+    {
+      "text": "No poetry today, Mai Ling. Just a machine learning how to sound like me. Snake out",
+      "start_time": 0.119,
+      "end_time": 6.939,
+      "words": [
+        {
+          "text": "No",
+          "start_time": 0.119,
+          "end_time": 0.359
+        },
+        {
+          "text": " ",
+          "start_time": 0.359,
+          "end_time": 0.479
+        },
+        {
+          "text": "poetry",
+          "start_time": 0.479,
+          "end_time": 1.0
+        },
+        {
+          "text": " ",
+          "start_time": 1.0,
+          "end_time": 1.079
+        },
+        {
+          "text": "today,",
+          "start_time": 1.079,
+          "end_time": 1.419
+        },
+        {
+          "text": " ",
+          "start_time": 1.419,
+          "end_time": 1.539
+        },
+        {
+          "text": "Mai",
+          "start_time": 1.539,
+          "end_time": 1.74
+        },
+        {
+          "text": " ",
+          "start_time": 1.74,
+          "end_time": 1.779
+        },
+        {
+          "text": "Ling.",
+          "start_time": 1.779,
+          "end_time": 2.019
+        },
+        {
+          "text": " ",
+          "start_time": 2.019,
+          "end_time": 2.359
+        },
+        {
+          "text": "Just",
+          "start_time": 2.359,
+          "end_time": 2.619
+        },
+        {
+          "text": " ",
+          "start_time": 2.619,
+          "end_time": 2.659
+        },
+        {
+          "text": "a",
+          "start_time": 2.659,
+          "end_time": 2.7
+        },
+        {
+          "text": " ",
+          "start_time": 2.7,
+          "end_time": 2.779
+        },
+        {
+          "text": "machine",
+          "start_time": 2.779,
+          "end_time": 3.399
+        },
+        {
+          "text": " ",
+          "start_time": 3.399,
+          "end_time": 3.919
+        },
+        {
+          "text": "learning",
+          "start_time": 3.919,
+          "end_time": 4.259
+        },
+        {
+          "text": " ",
+          "start_time": 4.259,
+          "end_time": 4.319
+        },
+        {
+          "text": "how",
+          "start_time": 4.319,
+          "end_time": 4.44
+        },
+        {
+          "text": " ",
+          "start_time": 4.44,
+          "end_time": 4.48
+        },
+        {
+          "text": "to",
+          "start_time": 4.48,
+          "end_time": 4.539
+        },
+        {
+          "text": " ",
+          "start_time": 4.539,
+          "end_time": 4.699
+        },
+        {
+          "text": "sound",
+          "start_time": 4.699,
+          "end_time": 4.98
+        },
+        {
+          "text": " ",
+          "start_time": 4.98,
+          "end_time": 5.079
+        },
+        {
+          "text": "like",
+          "start_time": 5.079,
+          "end_time": 5.239
+        },
+        {
+          "text": " ",
+          "start_time": 5.239,
+          "end_time": 5.359
+        },
+        {
+          "text": "me.",
+          "start_time": 5.359,
+          "end_time": 5.619
+        },
+        {
+          "text": " ",
+          "start_time": 5.619,
+          "end_time": 6.139
+        },
+        {
+          "text": "Snake",
+          "start_time": 6.139,
+          "end_time": 6.5
+        },
+        {
+          "text": " ",
+          "start_time": 6.5,
+          "end_time": 6.599
+        },
+        {
+          "text": "out",
+          "start_time": 6.599,
+          "end_time": 6.939
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "language_code": "eng",
+  "segments": [
+    {
+      "text": "They generated your voice with AI, Meryl. Even I can't tell the difference anymore. Snake out",
+      "start_time": 0.14,
+      "end_time": 6.879,
+      "words": [
+        {
+          "text": "They",
+          "start_time": 0.14,
+          "end_time": 0.419
+        },
+        {
+          "text": " ",
+          "start_time": 0.419,
+          "end_time": 0.459
+        },
+        {
+          "text": "generated",
+          "start_time": 0.459,
+          "end_time": 1.019
+        },
+        {
+          "text": " ",
+          "start_time": 1.019,
+          "end_time": 1.1
+        },
+        {
+          "text": "your",
+          "start_time": 1.1,
+          "end_time": 1.279
+        },
+        {
+          "text": " ",
+          "start_time": 1.279,
+          "end_time": 1.319
+        },
+        {
+          "text": "voice",
+          "start_time": 1.319,
+          "end_time": 1.659
+        },
+        {
+          "text": " ",
+          "start_time": 1.659,
+          "end_time": 1.679
+        },
+        {
+          "text": "with",
+          "start_time": 1.679,
+          "end_time": 1.839
+        },
+        {
+          "text": " ",
+          "start_time": 1.839,
+          "end_time": 2.019
+        },
+        {
+          "text": "AI,",
+          "start_time": 2.019,
+          "end_time": 2.399
+        },
+        {
+          "text": " ",
+          "start_time": 2.399,
+          "end_time": 2.559
+        },
+        {
+          "text": "Meryl.",
+          "start_time": 2.559,
+          "end_time": 2.919
+        },
+        {
+          "text": " ",
+          "start_time": 2.919,
+          "end_time": 3.379
+        },
+        {
+          "text": "Even",
+          "start_time": 3.379,
+          "end_time": 3.679
+        },
+        {
+          "text": " ",
+          "start_time": 3.679,
+          "end_time": 3.779
+        },
+        {
+          "text": "I",
+          "start_time": 3.779,
+          "end_time": 3.899
+        },
+        {
+          "text": " ",
+          "start_time": 3.899,
+          "end_time": 4.039
+        },
+        {
+          "text": "can't",
+          "start_time": 4.039,
+          "end_time": 4.219
+        },
+        {
+          "text": " ",
+          "start_time": 4.219,
+          "end_time": 4.339
+        },
+        {
+          "text": "tell",
+          "start_time": 4.339,
+          "end_time": 4.46
+        },
+        {
+          "text": " ",
+          "start_time": 4.46,
+          "end_time": 4.519
+        },
+        {
+          "text": "the",
+          "start_time": 4.519,
+          "end_time": 4.579
+        },
+        {
+          "text": " ",
+          "start_time": 4.579,
+          "end_time": 4.639
+        },
+        {
+          "text": "difference",
+          "start_time": 4.639,
+          "end_time": 4.98
+        },
+        {
+          "text": " ",
+          "start_time": 4.98,
+          "end_time": 5.039
+        },
+        {
+          "text": "anymore.",
+          "start_time": 5.039,
+          "end_time": 5.48
+        },
+        {
+          "text": " ",
+          "start_time": 5.48,
+          "end_time": 6.019
+        },
+        {
+          "text": "Snake",
+          "start_time": 6.019,
+          "end_time": 6.399
+        },
+        {
+          "text": " ",
+          "start_time": 6.399,
+          "end_time": 6.499
+        },
+        {
+          "text": "out",
+          "start_time": 6.5,
+          "end_time": 6.879
+        }
+      ]
+    }
+  ]
+}
