@@ -883,6 +883,31 @@ input.codec__freq-value:disabled {
   .codec__caret { animation: none; }
 }
 
+/* Móvil: el grid de 3 columnas aplasta los retratos. Reordenamos: los dos
+   retratos arriba (uno al lado del otro, tamaño usable para que las fotos se
+   vean) y el dial/controles a lo ancho debajo. */
+@media (max-width: 560px) {
+  .codec__screen {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "cmd op"
+      "freq freq";
+    gap: 1rem;
+    padding: 1.25rem 1rem;
+  }
+  #codec-portrait-commander { grid-area: cmd; }
+  #codec-portrait-operative { grid-area: op; }
+  .codec__freq { grid-area: freq; }
+
+  /* Indicador de señal en flujo (evita solaparse con el corchete de esquina) */
+  .codec__signal { position: static; text-align: right; margin-bottom: 0.25rem; }
+
+  /* Objetivos táctiles más grandes en el dial */
+  .codec__dial-btn { width: 3.2rem; font-size: 1rem; line-height: 1.8; }
+  input.codec__freq-value { width: 6ch; }
+  .codec__call { padding: 0.5rem 1.5rem; font-size: 0.85rem; }
+}
+
 /* --- GALERÍA / VISUAL LOG --- */
 .gallery {
   display: grid;
