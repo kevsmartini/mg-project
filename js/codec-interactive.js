@@ -68,6 +68,8 @@
   const opName = document.getElementById("codec-name-operative");
   const ringAudio = document.getElementById("codec-ringtone");
   const voiceAudio = document.getElementById("codec-voice");
+  const memBtn = document.getElementById("codec-mem");
+  const memList = document.getElementById("codec-memlist");
 
   // --- State ---
   let state = "idle";
@@ -131,11 +133,52 @@
   function renderFreq() {
     freqEl.value = fmt(freq);
   }
-  // Disable the dial (arrows + typing) while a call is in progress.
+  // Disable the dial (arrows + typing + MEMORY) while a call is in progress.
   function lockDial(locked) {
     upBtn.disabled = locked;
     downBtn.disabled = locked;
     freqEl.disabled = locked;
+    memBtn.disabled = locked;
+  }
+
+  /* -------------------------------------------------------------------------
+     MEMORY — saved frequencies (like the game's codec MEMORY list).
+     Built from FREQUENCIES; picking an entry tunes the dial.
+     ------------------------------------------------------------------------- */
+  function openMem() {
+    memList.hidden = false;
+    memBtn.setAttribute("aria-expanded", "true");
+  }
+  function closeMem() {
+    memList.hidden = true;
+    memBtn.setAttribute("aria-expanded", "false");
+  }
+  function toggleMem() {
+    if (state !== "idle" && state !== "nosignal") return;
+    if (memList.hidden) openMem();
+    else closeMem();
+  }
+  function buildMemList() {
+    Object.keys(FREQUENCIES)
+      .map(Number)
+      .sort((a, b) => a - b)
+      .forEach((key) => {
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "codec__memlist-item";
+        item.setAttribute("role", "menuitem");
+        const name = document.createElement("span");
+        name.textContent = FREQUENCIES[key].name;
+        const value = document.createElement("span");
+        value.textContent = fmt(key);
+        item.append(name, value);
+        item.addEventListener("click", () => {
+          freq = key;
+          renderFreq();
+          closeMem();
+        });
+        memList.appendChild(item);
+      });
   }
   function changeFreq(dir) {
     // The dial is locked once a call is in progress.
@@ -164,6 +207,7 @@
     setDialog(""); // empty box + caret
     callBtn.disabled = false;
     lockDial(false);
+    closeMem();
   }
 
   /* -------------------------------------------------------------------------
@@ -175,6 +219,7 @@
 
     const entry = FREQUENCIES[freq];
     const token = ++callToken;
+    closeMem();
     callBtn.disabled = true;
     lockDial(true);
 
@@ -360,6 +405,7 @@
   bindHold(upBtn, +1);
   bindHold(downBtn, -1);
   callBtn.addEventListener("click", startCall);
+  memBtn.addEventListener("click", toggleMem);
 
   // Frequency field: type it directly, tune with ↑/↓, Enter dials.
   freqEl.addEventListener("focus", () => freqEl.select());
@@ -377,14 +423,17 @@
     else if (e.key === "Enter") { e.preventDefault(); commitFreqInput(); startCall(); }
   });
 
-  // Escape hangs up / returns to idle from any active state.
+  // Escape closes the MEMORY list, or hangs up from any active state.
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && state !== "idle") resetToIdle();
+    if (e.key !== "Escape") return;
+    if (!memList.hidden) closeMem();
+    else if (state !== "idle") resetToIdle();
   });
 
   /* -------------------------------------------------------------------------
      INIT
      ------------------------------------------------------------------------- */
+  buildMemList();
   renderFreq();
   setDialog(""); // idle: empty dialog box with a blinking caret
   setState("idle");

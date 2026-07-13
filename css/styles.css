@@ -611,10 +611,10 @@ a:hover { text-decoration: underline; }
    columnas se encojan en pantallas estrechas sin desbordar. */
 .codec__screen {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1.15fr);
-  gap: clamp(0.5rem, 2.5vw, 1.75rem);
+  /* 3 columnas IGUALES; el padding lo pone ya el marco .hud-frame */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.4rem, 2vw, 1.5rem);
   align-items: stretch;
-  padding: clamp(0.75rem, 3vw, 2rem);
 }
 /* Columna de personaje: nombre arriba + retrato debajo */
 .codec__face {
@@ -708,14 +708,16 @@ a:hover { text-decoration: underline; }
   opacity: 0.85;
   animation: wave 1s ease-in-out infinite;
 }
+/* Los anchos siguen un arco circular (reducción suave arriba, rápida
+   abajo), como en el diseño del juego — no una diagonal recta. */
 .codec__waves span:nth-child(1) { width: 100%; animation-delay: 0s; }
 .codec__waves span:nth-child(2) { width: 90%;  animation-delay: 0.1s; }
-.codec__waves span:nth-child(3) { width: 80%;  animation-delay: 0.2s; }
-.codec__waves span:nth-child(4) { width: 68%;  animation-delay: 0.3s; }
-.codec__waves span:nth-child(5) { width: 56%;  animation-delay: 0.15s; }
-.codec__waves span:nth-child(6) { width: 44%;  animation-delay: 0.25s; }
-.codec__waves span:nth-child(7) { width: 32%;  animation-delay: 0.05s; }
-.codec__waves span:nth-child(8) { width: 20%;  animation-delay: 0.35s; }
+.codec__waves span:nth-child(3) { width: 79%;  animation-delay: 0.2s; }
+.codec__waves span:nth-child(4) { width: 66%;  animation-delay: 0.3s; }
+.codec__waves span:nth-child(5) { width: 52%;  animation-delay: 0.15s; }
+.codec__waves span:nth-child(6) { width: 38%;  animation-delay: 0.25s; }
+.codec__waves span:nth-child(7) { width: 24%;  animation-delay: 0.05s; }
+.codec__waves span:nth-child(8) { width: 10%;  animation-delay: 0.35s; }
 @keyframes wave {
   0%, 100% { opacity: 0.45; }
   50% { opacity: 1; }
@@ -829,7 +831,71 @@ input.codec__freq-value:disabled {
   letter-spacing: 0.12em;
   color: var(--green);
 }
-.codec__mem { opacity: 0.8; }
+/* ▼MEM.: abre la lista MEMORY de frecuencias guardadas */
+.codec__mem {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--green);
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  padding: 0.1rem 0.3rem;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: color 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.codec__mem:hover,
+.codec__mem:focus-visible,
+.codec__mem[aria-expanded="true"] {
+  color: var(--green-bright);
+  border-color: var(--green-bright);
+  box-shadow: 0 0 10px var(--green-glow);
+  outline: none;
+  opacity: 1;
+}
+.codec__mem[disabled] {
+  opacity: 0.4;
+  cursor: default;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+/* Lista MEMORY: se abre sobre el display central, como en el juego */
+.codec__memlist {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(0, 14, 6, 0.96);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1px, 0.4vw, 5px);
+  padding: clamp(0.25rem, 1vw, 0.75rem);
+  overflow-y: auto;
+}
+.codec__memlist[hidden] { display: none; }
+.codec__memlist-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--green);
+  font-family: var(--font-hud);
+  font-size: clamp(0.55rem, 1.6vw, 0.8rem);
+  letter-spacing: 0.1em;
+  padding: clamp(0.15rem, 0.7vw, 0.35rem) 0.4rem;
+  cursor: pointer;
+  text-align: left;
+}
+.codec__memlist-item:hover,
+.codec__memlist-item:focus-visible {
+  color: var(--green-bright);
+  border-color: var(--green-bright);
+  background: rgba(0, 255, 102, 0.08);
+  outline: none;
+}
 .codec__tune-group {
   display: flex;
   align-items: center;
@@ -922,10 +988,20 @@ input.codec__freq-value:disabled {
 /* Móvil: se mantiene el mismo layout de 3 columnas del diseño original,
    solo se compactan espacios y tipografía para que quepa sin desbordar. */
 @media (max-width: 560px) {
-  .codec__screen {
-    gap: 0.5rem;
-    padding: 0.75rem 0.6rem;
-  }
+  .codec__screen { gap: 0.4rem; }
+
+  /* El marco exterior se estrecha para dar más ancho a las columnas */
+  .codec.hud-frame { padding: 0.9rem 0.6rem; }
+
+  /* El número ocupa proporcionalmente más ancho en pantallas pequeñas:
+     la cuña se recorta más para no rozar la frecuencia. */
+  .codec__waves span:nth-child(2) { width: 86%; }
+  .codec__waves span:nth-child(3) { width: 72%; }
+  .codec__waves span:nth-child(4) { width: 58%; }
+  .codec__waves span:nth-child(5) { width: 44%; }
+  .codec__waves span:nth-child(6) { width: 30%; }
+  .codec__waves span:nth-child(7) { width: 17%; }
+  .codec__waves span:nth-child(8) { width: 7%; }
 
   /* Indicador de señal en flujo (evita solaparse con el corchete de esquina) */
   .codec__signal { position: static; text-align: right; margin-bottom: 0.25rem; }
