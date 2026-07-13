@@ -25,17 +25,15 @@
      Dialing a frequency not listed here = static / no connection.
      =========================================================== */
   const FREQUENCIES = {
-    14015: { name: "MERYL",         portrait: "assets/img/meryl-codec.png",    voice: "assets/audio/audio-for-meryl.mp3",   subs: "assets/audio/audio-for-meryl.json" },
-    14085: { name: "CAMPBELL",      portrait: "assets/img/cambell.webp",       voice: "assets/audio/audio-for-cambell.mp3", subs: "assets/audio/audio-for-cambell.json" },
-    // TODO: falta la imagen de Otacon — subir a assets/img/otacon-codec.png.
-    //       Hasta entonces el retrato cae a la silueta genérica (onerror).
-    14112: { name: "OTACON",        portrait: "assets/img/otacon-codec.png",   voice: "assets/audio/audio-for-otacon.mp3",  subs: "assets/audio/audio-for-otacon.json" },
-    14096: { name: "MEI LING",      portrait: "assets/img/may-ling-codec.png", voice: "assets/audio/audio-forMei-Ling.mp3", subs: "assets/audio/audio-forMei-Ling.json" },
-    14180: { name: "MASTER MILLER", portrait: "assets/img/miller-codec.png",   voice: "assets/audio/audio-for-miller.mp3",  subs: "assets/audio/audio-for-miller.json" },
+    14015: { name: "MERYL",         portrait: "assets/img/meryl-codec.webp",    voice: "assets/audio/audio-for-meryl.mp3",   subs: "assets/audio/audio-for-meryl.json" },
+    14085: { name: "CAMPBELL",      portrait: "assets/img/cambell-codec.webp",  voice: "assets/audio/audio-for-cambell.mp3", subs: "assets/audio/audio-for-cambell.json" },
+    14112: { name: "OTACON",        portrait: "assets/img/otacon-codec.webp",   voice: "assets/audio/audio-for-otacon.mp3",  subs: "assets/audio/audio-for-otacon.json" },
+    14096: { name: "MEI LING",      portrait: "assets/img/may-ling-codec.webp", voice: "assets/audio/audio-forMei-Ling.mp3", subs: "assets/audio/audio-forMei-Ling.json" },
+    14180: { name: "MASTER MILLER", portrait: "assets/img/miller-codec.webp",   voice: "assets/audio/audio-for-miller.mp3",  subs: "assets/audio/audio-for-miller.json" },
   };
 
   // Snake is always the COMMANDER side — the only one who speaks.
-  const SNAKE_PORTRAIT = "assets/img/snake.webp";
+  const SNAKE_PORTRAIT = "assets/img/snake-codec.webp";
 
   // Used while the real timestamp JSON isn't available for a frequency.
   // TODO: añadir JSON de timestamps real en assets/data/codec-lines/ para cada

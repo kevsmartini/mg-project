@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=3">
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
@@ -95,33 +95,43 @@
           <div class="codec__signal" aria-live="polite">SIGNAL: <span id="codec-signal">NONE</span></div>
 
           <div class="codec__screen">
-            <!-- Left portrait: COMMANDER (becomes Snake once connected) -->
-            <div class="codec__portrait" id="codec-portrait-commander">
-              <img class="codec__photo" id="codec-photo-commander" alt="" hidden>
-              <span id="codec-name-commander">COMMANDER</span>
+            <!-- Left face: OPERATIVE (becomes the dialed character) -->
+            <div class="codec__face">
+              <div class="codec__name"><span id="codec-name-operative">OPERATIVE</span></div>
+              <div class="codec__portrait" id="codec-portrait-operative">
+                <img class="codec__photo" id="codec-photo-operative" alt="" hidden>
+              </div>
             </div>
 
-            <!-- Frequency dial + audio bars + CALL -->
+            <!-- Center panel: PTT (call) + signal bars + frequency + TUNE -->
             <div class="codec__freq">
-              <div class="codec__dial">
-                <button type="button" class="codec__dial-btn" id="codec-freq-up" aria-label="Increase frequency">▲</button>
+              <button type="button" class="codec__ptt" id="codec-call"
+                      aria-label="Start call (push to talk)">PTT</button>
+              <div class="codec__display">
+                <div class="codec__waves" id="codec-waves" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span>
+                </div>
                 <input type="text" class="codec__freq-value" id="codec-freq"
                        inputmode="decimal" maxlength="6" autocomplete="off"
                        aria-label="CODEC frequency (type it, or use the arrows)" value="140.15">
-                <button type="button" class="codec__dial-btn" id="codec-freq-down" aria-label="Decrease frequency">▼</button>
               </div>
-              <div class="codec__freq-label">MEM · TUNE</div>
-              <div class="codec__waves" id="codec-waves" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span>
+              <div class="codec__tune">
+                <span class="codec__mem" aria-hidden="true">▼MEM.</span>
+                <span class="codec__tune-group">
+                  <button type="button" class="codec__tune-btn" id="codec-freq-down" aria-label="Decrease frequency">◄</button>
+                  <span class="codec__tune-label" aria-hidden="true">TUNE</span>
+                  <button type="button" class="codec__tune-btn" id="codec-freq-up" aria-label="Increase frequency">►</button>
+                </span>
               </div>
-              <button type="button" class="codec__call" id="codec-call">&gt; CALL</button>
             </div>
 
-            <!-- Right portrait: OPERATIVE (becomes the dialed character) -->
-            <div class="codec__portrait" id="codec-portrait-operative">
-              <img class="codec__photo" id="codec-photo-operative" alt="" hidden>
-              <span id="codec-name-operative">OPERATIVE</span>
+            <!-- Right face: COMMANDER (always Snake once connected) -->
+            <div class="codec__face">
+              <div class="codec__name"><span id="codec-name-commander">COMMANDER</span></div>
+              <div class="codec__portrait" id="codec-portrait-commander">
+                <img class="codec__photo" id="codec-photo-commander" alt="" hidden>
+              </div>
             </div>
           </div>
 
@@ -293,6 +303,6 @@
 
   <script src="js/main.js?v=2" defer></script>
   <!-- Interactive CODEC (dial/call state machine). Independent of main.js. -->
-  <script src="js/codec-interactive.js?v=2" defer></script>
+  <script src="js/codec-interactive.js?v=3" defer></script>
 </body>
 </html>
